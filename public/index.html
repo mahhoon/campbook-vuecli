@@ -1,17 +1,48 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="ja">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Let's go CAMPING</title>
+
+    <!--リセットCSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+    <!--favicon -->
+    <!--webフォント -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!--ファビコン-->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/android-chrome-192x192.png">
+    <!--cssはApp.vueで読み込む-->
+    <!--googlemaps-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8uIoaPz2mTI0XVtGIl7GZRPknGYSvrZA&langage=ja&region=JP" async defer></script>
+    <!--AOS-->
+    <!-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> -->
+    <!-- Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script> 
+
+    <noscript>
+    
+    </noscript>
   </head>
+
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- v8n -->
+    <script src="https://unpkg.com/v8n/dist/v8n.min.js"></script>
+    <!-- Sortable.js -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>
