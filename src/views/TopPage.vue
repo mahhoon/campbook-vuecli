@@ -237,13 +237,16 @@
             }
 
             .intro-icon {
-                color: $violet;
-                font-size: 35px;
-                position: relative;
-                top: 4px;
-                @include sp {
-                    font-size: 25px;
+                .fa-map-marked-alt, .fa-check-circle, .fa-list-alt, .fa-bookmark {
+                  color: $violet;
+                  font-size: 35px;
+                  position: relative;
+                  top: 4px;
+                  @include sp {
+                      font-size: 25px;
+                  }
                 }
+
             }
             .bookmark {
                 padding-left: 4px;
