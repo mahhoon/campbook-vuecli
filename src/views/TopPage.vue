@@ -102,3 +102,238 @@
 
   }
 </script>
+
+<style lang="scss" scoped>
+  @import "../assets/css/_base.scss";
+  @import "../assets/css/_modules.scss";
+
+#headercontent {
+    background-image: url(../assets/img/mainbg.jpg);
+    background-position: 50% 0%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 20px 0 50px;
+    height: 600px; 
+    @include sp {
+        height: auto;
+        padding-bottom: 30px;
+        img {
+            width: 200px;
+            padding-bottom: 0px;
+            text-align: left;
+        }
+        background-size: cover;
+    }
+
+    p {
+        padding-top: 20px;
+        @include sp {
+            line-height: 22px;
+            padding: 5px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+    }
+
+    .loginbuttons {
+        margin-top: 20px;
+        @include sp {
+            margin-top: 20px;
+        }
+        .btn-basic {
+            @include basic-btn;
+            display: inline-block;
+            margin: 0 20px;
+
+            @include sp {
+                width: 30%;
+                margin: 0 10px;
+                font-size: 15px;
+            }
+        }
+    }
+}
+//機能紹介
+#introduction {
+    padding: 0 40px 30px;
+    @include sp {
+        padding: 40px 20px 20px 20px;
+    }
+
+    .introduction__title {
+      display: flex;
+	    justify-content: center;
+	    align-items: center;
+        text-align: center;
+        font-size: 24px;
+        &::after {
+            content:'';
+            margin-left: 20px;
+            width: 2px;
+            height: 24px;
+            background-color: #333;
+            transform:rotate(35deg);
+        }
+        &::before {
+            content:'';
+            margin-right: 20px;
+            width: 2px;
+            height: 24px;
+            background-color: #333;
+            transform:rotate(-35deg);
+        }
+        @include sp {
+            font-size: 18px;
+            &::after,&::before {
+                height: 20px;
+            }
+        }
+    }
+    .introduction__p {
+        text-align: center;
+        padding-top: 10px;
+        font-size: 14px;
+    }
+
+    .introduction_contents {
+        @include pc {
+            margin-top: 20px;
+            @include flex;
+
+        }
+        .intro-img {
+            width: 35%;
+            img {
+                width: 100%;
+                border: 1px solid #ddd;
+                box-shadow: 4px 4px 6px #ddd;
+                border-radius: 6px;
+
+            }
+            @include sp {
+                width: 80%;
+                margin: 0 auto;
+            }
+        }
+    }
+    .introitems-wrap {
+        width: 60%;
+        padding-left: 20px;
+        @include sp {
+            margin: 20px 0;
+            width: 100%;
+            padding-left: 0;
+        }
+        
+        .intro-item {
+            padding: 20px 20px;
+            margin: 0 auto;
+            @include flex;
+            //justify-content: flex-start;
+            @include sp {
+                width: 100%;
+                padding: 10px 0;
+            }
+
+            .intro-icon {
+                color: $violet;
+                font-size: 35px;
+                position: relative;
+                top: 4px;
+                @include sp {
+                    font-size: 25px;
+                }
+            }
+            .bookmark {
+                padding-left: 4px;
+            }
+            .intro-text {
+                width: 88%;
+                @include sp {
+                    width: 82%;
+                }
+            }
+            h3 {
+                font-weight: 700;
+                color: $violet;
+            }
+            p {
+                font-size: 14px;
+                line-height: 1.5rem;
+                @include sp {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+    .introduction-author {
+        margin-left: 40px;
+        cursor: pointer;
+        display: inline-block;
+        @include sp {
+            margin: 60px 0 0 0;
+        }
+        img {
+            width: 50px;
+            vertical-align: middle;
+            @include sp {
+                width: 40px;
+            }
+        }
+        .about-author {
+            vertical-align: middle;
+            border-bottom: 1px dotted #333;
+            font-size: 13px;
+            @include sp {
+                font-size: 13px;
+            }
+        }
+    }
+    .author-msg {
+        margin-top: 5px;
+        margin-left: 40px;
+        display: none;
+        position: relative;
+        width: 80%;
+        color: $violet;
+        padding: 10px 15px;
+        font-size: 13px;
+        line-height: 1.5rem;
+        border: 1px solid $violet;
+        border-radius: 6px;
+
+        @include sp {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        //吹き出し三角
+        &::before {
+            content: '';
+            position: absolute;
+            left: 70px;
+            top: -10px;
+            display: block;
+            width: 0;
+            height: 0;
+            border-right: 8px solid transparent;
+            border-bottom: 10px solid $violet;
+            border-left: 8px solid transparent;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            left: 70px;
+            top: -8px;
+            display: block;
+            width: 0;
+            height: 0;
+            border-right: 8px solid transparent;
+            border-bottom: 10px solid #fff;
+            border-left: 8px solid transparent;
+        }
+    }
+}
+
+</style>
