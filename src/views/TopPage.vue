@@ -95,6 +95,7 @@
         this.signupModalShow = true;
       },
       closeModal() {
+        console.log('close')
         this.loginModalShow = false;
         this.signupModalShow = false;
       }
