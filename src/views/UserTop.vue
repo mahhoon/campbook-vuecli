@@ -30,7 +30,7 @@
       <div id="addcampplan" v-on:click="openNewcampModal">NEXT CAMP PLAN<br><span><i class="fas fa-plus-circle"></i></span></div>
       <div id="campcards">
           <ul class="campcards-wrap container">
-              <li class="campcard" v-for="(value, key) in campData" v-on:click="expandPage(value, key)">
+              <li class="campcard" v-for="(value, key) in campData" :key="key" v-on:click="expandPage(value, key)"><!--:key="key"はありだっけ？-->
                   <img v-if="value.downloadCampImage.length === 0" src="img/campimg.png">
                   <img v-else v-bind:src="value.downloadCampImage">
                   <div class="campcard__text">

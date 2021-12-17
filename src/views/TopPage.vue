@@ -5,7 +5,7 @@
       <div id="headercontent" class="container">
         <h1 class="pc"><img src="@/assets/img/title.svg" alt="キャンプノシオリ"></h1>
         <h1 class="sp"><img src="@/assets/img/title-sp.svg" alt="キャンプノシオリ"></h1>
-        <p>キャンプ行ってますかー？<br>キャンプの準備アプリ作ってみました！　<br class="sp">ちょっとだけ準備に役立つ？かも？<br>良かったら使ってみてください！
+        <p>キャンプ行ってますかー？<br>キャンプの準備アプリ作ってみました！<br class="sp">ちょっとだけ準備に役立つ？かも？<br>良かったら使ってみてください！
         <div class="loginbuttons">
             <div class="btn-basic loginbuttons__login" @click="openLoginModal">ログイン</div>
             <div class="btn-basic loginbuttons__signup" @click="openSignupModal">新規登録</div>
