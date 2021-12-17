@@ -32,3 +32,8 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  @import "../assets/css/_base.scss";
+  @import "../assets/css/_modules.scss";
+</style>

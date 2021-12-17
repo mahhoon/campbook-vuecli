@@ -38,7 +38,8 @@ export default {
         const auth = getAuth(firebaseApp);
         signInWithEmailAndPassword(auth, email, pass)
           .then((user) => {
-          console.log('ログインしました',user)
+          console.log('ログインしました',user);
+          this.$router.push('usertop')
           })
           .catch((error) => {
           console.error('ログインエラー', error);
@@ -50,3 +51,8 @@ export default {
 
 }
 </script>
+
+<style lang="scss" scoped>
+  @import "../assets/css/_base.scss";
+  @import "../assets/css/_modules.scss";
+</style>
