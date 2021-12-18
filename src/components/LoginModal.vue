@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { firebaseApp } from "@/main.js";
+// import { firebaseApp } from "@/main.js";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
@@ -26,7 +26,16 @@ export default {
   data() {
     return {
       loginEmail: '',
-      loginPassword: ''
+      loginPassword: '',
+    }
+  },
+
+  computed: {
+    calc() {
+      return this.num + 1
+    },
+    user() {
+      return this.$store.state.user
     }
   },
 
@@ -35,7 +44,7 @@ export default {
         this.$emit('close-modal')
     },
     logIn(email, pass) {
-        const auth = getAuth(firebaseApp);
+        const auth = getAuth();
         signInWithEmailAndPassword(auth, email, pass)
           .then((user) => {
           console.log('ログインしました',user);
@@ -45,7 +54,7 @@ export default {
           console.error('ログインエラー', error);
           //this.errormsg = true
           })
-    }
+    },
   }
 
 
