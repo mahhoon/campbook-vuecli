@@ -1,7 +1,7 @@
 <template>
   <div>
     <section id="toppage">
-      <!--KV-->
+      <!-- KV -->
       <div id="headercontent" class="container">
         <h1 class="pc"><img src="@/assets/img/title.svg" alt="キャンプノシオリ"></h1>
         <h1 class="sp"><img src="@/assets/img/title-sp.svg" alt="キャンプノシオリ"></h1>
@@ -11,9 +11,13 @@
             <div class="btn-basic loginbuttons__signup" @click="openSignupModal">新規登録</div>
         </div>
       </div>
+      <!-- /KV -->
+
       <!--ログインモーダル-->
       <LoginModal v-show="loginModalShow" @close-modal="closeModal"></LoginModal>
-      <SignupModal v-show="signupModalShow" @close-modal="closeModal" @set-uname="setUserName"></SignupModal>
+      <SignupModal v-show="signupModalShow" @close-modal="closeModal"></SignupModal>
+      <!-- <SignupModal v-show="signupModalShow" @close-modal="closeModal" @set-uname="setUserName"></SignupModal> -->
+      
       <!--機能紹介-->
       <div id="introduction" class="container">
         <h2 class="introduction__title">こんなことができます</h2>

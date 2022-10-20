@@ -45,6 +45,8 @@
 </template>
 
 <script>
+  import { firebaseApp } from "@/main.js";
+  import { getAuth, signOut } from "firebase/auth";
   import Footer from "@/modules/Footer.vue";
 
   export default {
@@ -57,7 +59,18 @@
         togglemenu: 'togglemenu',
         sp: 'sp',
       }
-  }
+    },
+
+    methods: {
+      logOut() {
+        const auth = getAuth(firebaseApp)
+        signOut(auth)
+        .then( () => {
+          console.log('ログアウトしました');
+        })
+      }
+    }
+
   }
 
 </script>
