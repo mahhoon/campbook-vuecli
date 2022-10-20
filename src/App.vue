@@ -12,6 +12,11 @@
   // import { firebaseApp } from "@/main.js";
   // import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+  export default {
+    mounted() {
+
+    }
+  }
   // mounted(): {
   //   const auth = getAuth();
   //   onAuthStateChenged (auth, (user) => {
@@ -23,5 +28,6 @@
 
 
 <style lang="scss">
-  @import "./assets/css/main.css";
+  // @import "./assets/css/main.css";
+
 </style>
