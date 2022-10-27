@@ -5,37 +5,42 @@
       <div class="user-heading container">
           <h1 class="pc"><img src="@/assets/img/logo-small.svg"></h1>
           <div class="user pc">
+<!--            ログイン後にコンソールにエラーがたくさん出てるのは、-->
+<!--            このvueファイル上でcurrentUnameとかのプロパティとかメソッドが定義されてないから出ているだけなので-->
+<!--            それらをちゃんと実装してやれば直るので問題なし!-->
               <p class="username">{{ currentUname }}さん、こんにちは</p>
-              <p class="logout" v-on:click="logOut">ログアウト</p>
+              <p class="logout" @click="logout">ログアウト</p>
           </div>
 
           <h1 class="sp"><img src="@/assets/img/logo-small.svg"></h1>
           <div class="toggle-wrap sp">
-              <div class="togglebtn" v-on:click="showToggleMenu">
+              <div class="togglebtn" @click="showToggleMenu">
                   <span><i class="fas fa-bars"></i></span>
               </div>
           </div>
       </div>
-      <div v-bind:class="[togglemenu, {'togglemenu-show':isActive}, sp]">
-          <p v-on:click="showUserGoodsLists"><span class="icon"><i class="fas fa-check-circle"></i></span>持ち物リストの編集</p>
+<!--      ここのクラス指定玄人っぽい！-->
+      <div :class="[togglemenu, {'togglemenu-show':isActive}, sp]">
+          <p @click="showUserGoodsLists"><span class="icon"><i class="fas fa-check-circle"></i></span>持ち物リストの編集</p>
           <!-- <p class="non-active"><span class="icon"><i class="fas fa-camera"></i></span>写真投稿</p> -->
-          <p v-on:click="logOut"><span class="icon"><i class="fas fa-sign-out-alt"></i></span>ログアウト</p>
+          <p @click="logout"><span class="icon"><i class="fas fa-sign-out-alt"></i></span>ログアウト</p>
       </div>
       <div class="username-sp container"><p class="sp">{{ currentUname }}さん、こんにちは</p></div>
       
       <div class="personal-link container pc">
-          <P v-on:click="showUserGoodsLists" class="editgoodsbtn"><span class="icon"><i class="fas fa-check-circle"></i></span>基本の持ち物リストを編集</P>
+          <P @click="showUserGoodsLists" class="editgoodsbtn"><span class="icon"><i class="fas fa-check-circle"></i></span>基本の持ち物リストを編集</P>
           <!-- <p class="non-active"><span class="icon"><i class="fas fa-camera"></i></span>写真投稿</p> -->
       </div>
-      <div id="addcampplan" v-on:click="openNewcampModal">NEXT CAMP PLAN<br><span><i class="fas fa-plus-circle"></i></span></div>
+      <div id="addcampplan" @click="openNewcampModal">NEXT CAMP PLAN<br><span><i class="fas fa-plus-circle"></i></span></div>
       <div id="campcards">
           <ul class="campcards-wrap container">
-              <li class="campcard" v-for="(value, key) in campData" :key="key" v-on:click="expandPage(value, key)"><!--:key="key"はありだっけ？-->
-                  <img v-if="value.downloadCampImage.length === 0" src="img/campimg.png">
-                  <img v-else v-bind:src="value.downloadCampImage">
+              <li class="campcard" v-for="(item, key) in campData" :key="key" @click="expandPage(item, key)">
+                <!--:key="key"はありだっけ？ →一応、"campcard-" + key 的な感じにするのがいいらしいけど、正直 :key="key"みたいに適当にやること多いですw-->
+                  <img v-if="item.downloadCampImage.length === 0" src="img/campimg.png">
+                  <img v-else :src="item.downloadCampImage">
                   <div class="campcard__text">
-                      <p class="campcard__place">{{value.campsiteName}}</p>
-                      <p class="campcard__data">{{value.fromCampDate}}〜{{value.toCampDate}}</p>
+                      <p class="campcard__place">{{item.campsiteName}}</p>
+                      <p class="campcard__data">{{item.fromCampDate}}〜{{item.toCampDate}}</p>
                   </div>
               </li>
           </ul>
@@ -57,6 +62,7 @@ import { auth } from "@/main.js";
     data() {
       return {
         togglemenu: 'togglemenu',
+        // このspという名前は何が入ってるデータなのか分かりにくいかも
         sp: 'sp',
       }
     },

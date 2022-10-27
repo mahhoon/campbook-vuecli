@@ -8,7 +8,8 @@
 </template>
 
 <script>
-// @ is an alias to /src
+// @ is an alias to /src ← かっこいい
+// このページは使われてない？
 import HelloWorld from "@/components/HelloWorld.vue";
 import TestComponent from '@/modules/TestComponent.vue'
 
