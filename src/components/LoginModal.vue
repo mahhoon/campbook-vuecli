@@ -36,8 +36,8 @@
 -->
 
 <script>
-import { firebaseApp } from "@/main.js";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/main.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
   name: 'LoginModal',
@@ -53,9 +53,8 @@ export default {
     closeModal() {
         this.$emit('close-modal')
     },
-    logIn(email, pass) {
-        const auth = getAuth(firebaseApp);
-        signInWithEmailAndPassword(auth, email, pass)
+    login() {
+        signInWithEmailAndPassword(auth, this.email, this.password)
           .then((user) => {
           console.log('ログインしました',user);
           this.$router.push('usertop')

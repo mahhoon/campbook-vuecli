@@ -46,8 +46,8 @@
 -->
 
 <script>
-  import { firebaseApp } from "@/main.js";
-  import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/main.js";
+  import { createUserWithEmailAndPassword } from "firebase/auth";
 
   export default {
     name: 'SignupModal',
@@ -65,9 +65,8 @@
       closeModal() {
         this.$emit('close-modal')
       },
-      signUp(email, pass) {
-        const auth = getAuth(firebaseApp);
-        createUserWithEmailAndPassword(auth, email, pass)
+      signUp() {
+        createUserWithEmailAndPassword(auth, this.email, this.password)
           .then((result) => {
             console.log('登録しました', result);
           })

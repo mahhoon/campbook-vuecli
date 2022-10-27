@@ -45,8 +45,8 @@
 </template>
 
 <script>
-  import { firebaseApp } from "@/main.js";
-  import { getAuth, signOut } from "firebase/auth";
+import { auth } from "@/main.js";
+  import { signOut } from "firebase/auth";
   import Footer from "@/modules/Footer.vue";
 
   export default {
@@ -62,8 +62,9 @@
     },
 
     methods: {
-      logOut() {
-        const auth = getAuth(firebaseApp)
+      // onAuthStateChangedというメソッドでユーザーのログイン状態を監視して、
+      // ログアウトしてたらトップに遷移するように書いておけば良さそうですね
+      logout() {
         signOut(auth)
         .then( () => {
           console.log('ログアウトしました');
