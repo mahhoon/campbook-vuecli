@@ -4,6 +4,8 @@ import TopPage from "../views/TopPage.vue";
 
 Vue.use(VueRouter);
 
+// vue routerの設定完璧ですね！
+// ページが増えたらここに追加していけばOK
 const routes = [
   {
     path: "/",

@@ -59,6 +59,7 @@
           <img src="@/assets/img/faceicon.svg">
           <span class="about-author">制作者について</span>
         </div>
+<!--        ここのメッセージなぜか表示されてないですね〜-->
         <div class="author-msg">
           <p>
             キャンプ好き、スノーボード好き。プログラミングの勉強を始めたら楽しくなり、どうせならとキャンプのアプリ制作に挑戦（無謀・・！）
