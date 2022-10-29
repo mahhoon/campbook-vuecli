@@ -1,14 +1,24 @@
 <template>
   <div class="modal-wrapping" id="modal-login">
     <div class="overlay">
-      <form class="modal-wrapping" @submit.prevent="logIn(loginEmail,loginPassword)">
-        <div class="close-modal" @click="closeModal"><i class="fa fa-2x fa-times"></i></div>
+      <form class="modal-wrapping" @submit.prevent="logIn()">
+        <div class="close-modal" @click="closeModal">
+          <i class="fa fa-2x fa-times"></i>
+        </div>
         <p class="modal-wrapping__title">ログイン</p>
         <div class="modal-wrapping__name">メールアドレス</div>
-        <input type="email" class="modal-wrapping__formcontrol login-email" v-model="loginEmail">
+        <input
+          type="email"
+          class="modal-wrapping__formcontrol login-email"
+          v-model="email"
+        />
         <!-- <div class="modal-msgbox"><p class="modal-errormsg" v-show="errormsgInvalid">無効なメールアドレスです</p></div> -->
         <div class="modal-wrapping__name">パスワード</div>
-        <input type="password" class="modal-wrapping__formcontrol login-password" v-model="loginPassword">
+        <input
+          type="password"
+          class="modal-wrapping__formcontrol login-password"
+          v-model="password"
+        />
         <!-- <div class="modal-msgbox"><p class="modal-errormsg" v-show="errormsg">メールアドレスかパスワードが間違っています..</p></div> -->
         <button type="submit" class="modal-wrapping__submit">ログイン</button>
       </form>
@@ -36,42 +46,39 @@
 -->
 
 <script>
-import { firebaseApp } from "@/main.js";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/main.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
-  name: 'LoginModal',
+  name: "LoginModal",
 
   data() {
     return {
-      loginEmail: '',
-      loginPassword: ''
-    }
+      email: "",
+      password: "",
+    };
   },
 
   methods: {
     closeModal() {
-        this.$emit('close-modal')
+      this.$emit("close-modal");
     },
-    logIn(email, pass) {
-        const auth = getAuth(firebaseApp);
-        signInWithEmailAndPassword(auth, email, pass)
-          .then((user) => {
-          console.log('ログインしました',user);
-          this.$router.push('usertop')
-          })
-          .catch((error) => {
-          console.error('ログインエラー', error);
+    logIn() {
+      signInWithEmailAndPassword(auth, this.email, this.password)
+        .then((user) => {
+          console.log("ログインしました", user);
+          this.$router.push("usertop");
+        })
+        .catch((error) => {
+          console.error("ログインエラー", error);
           //this.errormsg = true
-          })
-    }
-  }
-
-
-}
+        });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/css/_base.scss";
-  @import "../assets/css/_modules.scss";
+@import "../assets/css/_base.scss";
+@import "../assets/css/_modules.scss";
 </style>

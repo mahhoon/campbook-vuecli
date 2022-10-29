@@ -6,6 +6,7 @@ import store from "./store";
 /* firebase start */
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -18,16 +19,16 @@ const firebaseConfig = {
   projectId: "camp-booklet-4944c",
   storageBucket: "camp-booklet-4944c.appspot.com",
   messagingSenderId: "778773079794",
-  appId: "1:778773079794:web:13a7766fe2bff0fc51526b"
+  appId: "1:778773079794:web:13a7766fe2bff0fc51526b",
 };
 
 // Initialize Firebase
- export const firebaseApp = initializeApp(firebaseConfig);
+export const firebaseApp = initializeApp(firebaseConfig);
+export const auth = getAuth(firebaseApp); //コンポーネントでいちいち書かない
 
 /* firebase end */
 
-
-Vue.config.productionTip = false;
+Vue.config.productionTip = false; //開発者用の情報をコンソールに出すかどうか
 
 new Vue({
   router,
