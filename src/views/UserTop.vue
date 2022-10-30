@@ -6,23 +6,23 @@
       <h1 class="pc"><img src="@/assets/img/logo-small.svg" /></h1>
       <div class="user pc">
         <p class="username">{{ currentUname }}さん、こんにちは</p>
-        <p class="logout" v-on:click="logOut">ログアウト</p>
+        <p class="logout" @click="logOut">ログアウト</p>
       </div>
 
       <h1 class="sp"><img src="@/assets/img/logo-small.svg" /></h1>
       <div class="toggle-wrap sp">
-        <div class="togglebtn" v-on:click="showToggleMenu">
+        <div class="togglebtn" @click="showToggleMenu">
           <span><i class="fas fa-bars"></i></span>
         </div>
       </div>
     </div>
-    <div v-bind:class="[togglemenu, { 'togglemenu-show': isActive }, sp]">
-      <p v-on:click="showUserGoodsLists">
+    <div :class="[togglemenu, { 'togglemenu-show': isActive }, sp]">
+      <p @click="showUserGoodsLists">
         <span class="icon"><i class="fas fa-check-circle"></i></span
         >持ち物リストの編集
       </p>
       <!-- <p class="non-active"><span class="icon"><i class="fas fa-camera"></i></span>写真投稿</p> -->
-      <p v-on:click="logOut">
+      <p @click="logOut">
         <span class="icon"><i class="fas fa-sign-out-alt"></i></span>ログアウト
       </p>
     </div>
@@ -31,13 +31,13 @@
     </div>
 
     <div class="personal-link container pc">
-      <P v-on:click="showUserGoodsLists" class="editgoodsbtn"
+      <P @click="showUserGoodsLists" class="editgoodsbtn"
         ><span class="icon"><i class="fas fa-check-circle"></i></span
         >基本の持ち物リストを編集</P
       >
       <!-- <p class="non-active"><span class="icon"><i class="fas fa-camera"></i></span>写真投稿</p> -->
     </div>
-    <div id="addcampplan" v-on:click="openNewcampModal">
+    <div id="addcampplan" @click="openNewcampModal">
       NEXT CAMP PLAN<br /><span><i class="fas fa-plus-circle"></i></span>
     </div>
     <div id="campcards">
@@ -46,14 +46,14 @@
           class="campcard"
           v-for="(value, key) in campData"
           :key="key"
-          v-on:click="expandPage(value, key)"
+          @click="expandPage(value, key)"
         >
           <!--:key="key"はありだっけ？-->
           <img
             v-if="value.downloadCampImage.length === 0"
             src="img/campimg.png"
           />
-          <img v-else v-bind:src="value.downloadCampImage" />
+          <img v-else :src="value.downloadCampImage" />
           <div class="campcard__text">
             <p class="campcard__place">{{ value.campsiteName }}</p>
             <p class="campcard__data">
@@ -68,8 +68,9 @@
 </template>
 
 <script>
-import { firebaseApp } from "@/main.js";
-import { getAuth, signOut } from "firebase/auth";
+import { auth } from "@/main.js";
+import { onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import Footer from "@/components/Footer.vue";
 
 export default {
@@ -84,13 +85,30 @@ export default {
     };
   },
 
+  computed: {
+    currentUname() {
+      return this.$store.state.user.user.nickname;
+    },
+  },
+
   methods: {
     logOut() {
-      const auth = getAuth(firebaseApp);
       signOut(auth).then(() => {
         console.log("ログアウトしました");
+        this.$router.push("/");
       });
     },
+  },
+
+  mounted() {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user.displayName);
+        this.$store.dispatch("user/updateNickname", user.displayName);
+      } else {
+        this.logOut();
+      }
+    });
   },
 };
 </script>

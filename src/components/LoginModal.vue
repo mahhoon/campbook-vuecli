@@ -1,7 +1,7 @@
 <template>
   <div class="modal-wrapping" id="modal-login">
     <div class="overlay">
-      <form class="modal-wrapping" @submit.prevent="logIn()">
+      <form class="modal-wrapping" @submit.prevent="logIn">
         <div class="close-modal" @click="closeModal">
           <i class="fa fa-2x fa-times"></i>
         </div>
