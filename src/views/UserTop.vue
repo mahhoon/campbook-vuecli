@@ -87,7 +87,7 @@ export default {
 
   computed: {
     currentUname() {
-      return this.$store.state.user.user.nickname;
+      return this.$store.state.user.nickname;
     },
   },
 
