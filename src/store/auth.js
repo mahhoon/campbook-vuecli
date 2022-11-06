@@ -1,8 +1,10 @@
-export const user = {
+export const auth = {
   namespaced: true, //忘れずに
   state: {
     user: {
+      uid: "",
       nickname: "",
+      email: "",
     },
   },
   mutations: {
@@ -17,5 +19,9 @@ export const user = {
       commit("updateNickname", nickname); //commitはmutationを実行する関数（実行するmutation名, 渡す値）
     },
   },
-  getters: {},
+  getters: {
+    getUser(state) {
+      return state.user;
+    },
+  },
 };

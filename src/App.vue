@@ -11,19 +11,22 @@
 </template>
 
 <script>
-// import { firebaseApp } from "@/main.js";
-// import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/main.js";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default {
-  mounted() {},
+  mounted() {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user.displayName);
+        this.$store.dispatch("auth/updateNickname", user.displayName);
+      } else {
+        this.$router.push("/");
+        this.$store.dispatch("auth/updateNickname", "");
+      }
+    });
+  },
 };
-// mounted(): {
-//   const auth = getAuth();
-//   onAuthStateChenged (auth, (user) => {
-//     if (user) {
-//       console.log('login', user);
-//     }
-//   })
 </script>
 
 <style lang="scss">

@@ -5,7 +5,7 @@
     <div class="user-heading container">
       <h1 class="pc"><img src="@/assets/img/logo-small.svg" /></h1>
       <div class="user pc">
-        <p class="username">{{ currentUname }}さん、こんにちは</p>
+        <p class="username">{{ currentUser.nickname }}さん、こんにちは</p>
         <p class="logout" @click="logOut">ログアウト</p>
       </div>
 
@@ -27,7 +27,7 @@
       </p>
     </div>
     <div class="username-sp container">
-      <p class="sp">{{ currentUname }}さん、こんにちは</p>
+      <p class="sp">{{ currentUser.nickname }}さん、こんにちは</p>
     </div>
 
     <div class="personal-link container pc">
@@ -69,9 +69,8 @@
 
 <script>
 import { auth } from "@/main.js";
-import { onAuthStateChanged } from "firebase/auth";
-import { signOut } from "firebase/auth";
 import Footer from "@/components/Footer.vue";
+import { signOut } from "firebase/auth";
 
 export default {
   components: {
@@ -86,11 +85,10 @@ export default {
   },
 
   computed: {
-    currentUname() {
-      return this.$store.state.user.nickname;
+    currentUser() {
+      return this.$store.getters["auth/getUser"];
     },
   },
-
   methods: {
     logOut() {
       signOut(auth).then(() => {
@@ -98,17 +96,6 @@ export default {
         this.$router.push("/");
       });
     },
-  },
-
-  mounted() {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log(user.displayName);
-        this.$store.dispatch("user/updateNickname", user.displayName);
-      } else {
-        this.logOut();
-      }
-    });
   },
 };
 </script>
