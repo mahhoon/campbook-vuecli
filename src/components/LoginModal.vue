@@ -1,77 +1,117 @@
 <template>
   <div class="modal-wrapping" id="modal-login">
     <div class="overlay">
-      <form class="modal-wrapping" @submit.prevent="logIn(loginEmail,loginPassword)">
-        <div class="close-modal" @click="closeModal"><i class="fa fa-2x fa-times"></i></div>
+      <form class="modal-wrapping" @submit.prevent="logIn">
+        <div class="close-modal" @click="closeModal">
+          <i class="fa fa-2x fa-times"></i>
+        </div>
         <p class="modal-wrapping__title">ログイン</p>
         <div class="modal-wrapping__name">メールアドレス</div>
-        <input type="email" class="modal-wrapping__formcontrol login-email" v-model="loginEmail">
-        <!-- <div class="modal-msgbox"><p class="modal-errormsg" v-show="errormsgInvalid">無効なメールアドレスです</p></div> -->
+        <input
+          type="email"
+          class="modal-wrapping__formcontrol login-email"
+          v-model="email"
+          @keyup="checkEmail"
+        />
+        <div class="modal-msgbox">
+          <p class="modal-errormsg" v-show="errormsgInvalid">
+            無効なメールアドレスです
+          </p>
+        </div>
         <div class="modal-wrapping__name">パスワード</div>
-        <input type="password" class="modal-wrapping__formcontrol login-password" v-model="loginPassword">
-        <!-- <div class="modal-msgbox"><p class="modal-errormsg" v-show="errormsg">メールアドレスかパスワードが間違っています..</p></div> -->
-        <button type="submit" class="modal-wrapping__submit">ログイン</button>
+        <input
+          type="password"
+          class="modal-wrapping__formcontrol login-password"
+          v-model="password"
+          @keyup="checkPassword"
+        />
+        <div class="modal-msgbox">
+          <p class="modal-errormsg" v-show="errormsg">
+            メールアドレスかパスワードが間違っています..
+          </p>
+        </div>
+        <button
+          type="submit"
+          class="modal-wrapping__submit"
+          :disabled="isDisabled"
+        >
+          ログイン
+        </button>
       </form>
     </div>
   </div>
 </template>
-<!--
-<template>
-  <div class="modal-wrapping" id="modal-login">
-    <div class="overlay">
-      <form class="modal-wrapping" @submit.prevent="logIn(loginEmail,loginPassword)">
-        <div class="close-modal" @click="closeModal"><i class="fa fa-2x fa-times"></i></div>
-        <p class="modal-wrapping__title">ログイン</p>
-        <div class="modal-wrapping__name">メールアドレス</div>
-        <input type="email" class="modal-wrapping__formcontrol login-email" v-model="loginEmail" @keyup="checkEmail">
-        <div class="modal-msgbox"><p class="modal-errormsg" v-show="errormsgInvalid">無効なメールアドレスです</p></div>
-        <div class="modal-wrapping__name">パスワード</div>
-        <input type="password" class="modal-wrapping__formcontrol login-password" v-model="loginPassword" @keyup="checkPassword">
-        <div class="modal-msgbox"><p class="modal-errormsg" v-show="errormsg">メールアドレスかパスワードが間違っています..</p></div>
-        <button type="submit" class="modal-wrapping__submit" :disabled="addDisabled">ログイン</button>
-      </form>
-    </div>
-  </div>
-</template>
--->
 
 <script>
-import { firebaseApp } from "@/main.js";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/main.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import v8n from "v8n";
 
 export default {
-  name: 'LoginModal',
+  name: "LoginModal",
 
   data() {
     return {
-      loginEmail: '',
-      loginPassword: ''
-    }
+      email: "",
+      password: "",
+      errormsgInvalid: false,
+      isDisabled: true,
+      errormsg: false,
+    };
   },
 
   methods: {
     closeModal() {
-        this.$emit('close-modal')
+      this.$emit("close-modal");
     },
-    logIn(email, pass) {
-        const auth = getAuth(firebaseApp);
-        signInWithEmailAndPassword(auth, email, pass)
-          .then((user) => {
-          console.log('ログインしました',user);
-          this.$router.push('usertop')
-          })
-          .catch((error) => {
-          console.error('ログインエラー', error);
-          //this.errormsg = true
-          })
-    }
-  }
-
-
-}
+    checkEmail() {
+      const check = v8n()
+        .not.null()
+        .string() // 文字列
+        .minLength(5) // a@b.c を想定して最低5文字
+        .pattern(/[^\s@]+@[^\s@]+\.[^\s@]+/) // eメール用の正規表現
+        .test(this.email); // 検証
+      console.log(check);
+      if (!check) {
+        this.errormsgInvalid = true;
+      } else {
+        this.errormsgInvalid = false;
+      }
+      this.toggledisabled();
+    },
+    checkPassword() {
+      this.toggledisabled();
+    },
+    toggledisabled() {
+      if (this.email.length !== 0 && this.password.length !== 0) {
+        if (!this.errormsgInvalid) {
+          this.isDisabled = false;
+        }
+      }
+      if (
+        this.email.length === 0 ||
+        this.password.length === 0 ||
+        this.errormsgInvalid
+      ) {
+        this.isDisabled = true;
+      }
+    },
+    logIn() {
+      signInWithEmailAndPassword(auth, this.email, this.password)
+        .then((user) => {
+          console.log("ログインしました", user);
+          this.$router.push("usertop");
+        })
+        .catch((error) => {
+          console.error("ログインエラー", error);
+          this.errormsg = true;
+        });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/css/_base.scss";
-  @import "../assets/css/_modules.scss";
+@import "../assets/css/_base.scss";
+@import "../assets/css/_modules.scss";
 </style>
