@@ -28,11 +28,13 @@ export default {
         onValue(ref(database, `campbooks/${user.uid}`), (snapshot) => {
           // this.campData = snapshot.val();
           console.log(snapshot.val());
+          this.$store.dispatch("camp/updateCampData", snapshot.val());
         });
       } else {
         this.$store.dispatch("auth/updateNickname", "");
         this.$store.dispatch("auth/updateUid", "");
         this.$store.dispatch("auth/updateEmail", "");
+        // this.$store.dispatch("camp/updateCampData", "");
         this.$router.push("/");
       }
     });

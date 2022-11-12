@@ -9,49 +9,60 @@
         <p class="logout" @click="logOut">ログアウト</p>
       </div>
 
-      <h1 class="sp"><img src="@/assets/img/logo-small.svg" /></h1>
-      <div class="toggle-wrap sp">
+      <!-- <h1 class="sp"><img src="@/assets/img/logo-small.svg" /></h1> -->
+      <!-- <div class="toggle-wrap sp">
         <div class="togglebtn" @click="showToggleMenu">
           <span><i class="fas fa-bars"></i></span>
         </div>
-      </div>
+      </div> -->
     </div>
-    <div :class="[togglemenu, { 'togglemenu-show': isActive }, sp]">
-      <p @click="showUserGoodsLists">
+    <!-- <div :class="[togglemenu, { 'togglemenu-show': isActive }, sp]"> -->
+    <!-- <p @click="showUserGoodsLists">
         <span class="icon"><i class="fas fa-check-circle"></i></span
         >持ち物リストの編集
-      </p>
-      <!-- <p class="non-active">
+      </p> -->
+    <!-- <p class="non-active">
         <span class="icon"><i class="fas fa-camera"></i></span>写真投稿
       </p> -->
-      <p @click="logOut">
+    <!-- <p @click="logOut">
         <span class="icon"><i class="fas fa-sign-out-alt"></i></span>ログアウト
-      </p>
-    </div>
+      </p> -->
+    <!-- </div> -->
     <div class="username-sp container">
       <p class="sp">{{ currentUser.nickname }}さん、こんにちは</p>
     </div>
 
-    <div class="personal-link container pc">
+    <!-- <div class="personal-link container pc">
       <P @click="showUserGoodsLists" class="editgoodsbtn"
         ><span class="icon"><i class="fas fa-check-circle"></i></span
         >基本の持ち物リストを編集</P
-      >
-      <!-- <p class="non-active"><span class="icon"><i class="fas fa-camera"></i></span>写真投稿</p> -->
-    </div>
+      > -->
+    <!-- <p class="non-active"><span class="icon"><i class="fas fa-camera"></i></span>写真投稿</p> -->
+    <!-- </div> -->
     <div id="addcampplan" @click="openNewCampModal">
       NEXT CAMP PLAN<br /><span><i class="fas fa-plus-circle"></i></span>
     </div>
-
     <div id="campcards">
       <ul class="campcards-wrap container">
-        <li
+        <li class="campcard" v-for="(campData, key) in campDatas" :key="key">
+          <img
+            v-if="campData.downloadCampImage.length === 0"
+            src="@/assets/img/campimg.png"
+          />
+          <img v-else :src="campData.downloadCampImage" />
+          <div class="campcard__text">
+            <p class="campcard__place">{{ campData.campsiteName }}</p>
+            <p class="campcard__data">
+              {{ campData.fromCampDate }}〜{{ campData.toCampDate }}
+            </p>
+          </div>
+        </li>
+        <!-- <li
           class="campcard"
           v-for="(item, key) in campData"
           :key="key"
           @click="expandPage(item, key)"
         >
-          <!--:key="key"はありだっけ？-->
           <img
             v-if="item.downloadCampImage.length === 0"
             src="img/campimg.png"
@@ -63,7 +74,7 @@
               {{ item.fromCampDate }}〜{{ item.toCampDate }}
             </p>
           </div>
-        </li>
+        </li> -->
       </ul>
     </div>
     <!-- キャンプ登録モーダル -->
@@ -90,13 +101,15 @@ export default {
       togglemenu: "togglemenu",
       sp: "sp",
       registCampModalShow: false,
-      campData: "",
     };
   },
 
   computed: {
     currentUser() {
       return this.$store.getters["auth/getUser"];
+    },
+    campDatas() {
+      return this.$store.getters["camp/getCampData"];
     },
   },
 

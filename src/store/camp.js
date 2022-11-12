@@ -1,16 +1,21 @@
 export const camp = {
   namespaced: true, //忘れずに
   state: {
-    campData: {
-      siteName: "",
-      siteUrl: "",
-      siteTel: "",
-      fromCampDate: "",
-      toCampDate: "",
-      downloadCampImage: "",
+    camp: {},
+  },
+  mutations: {
+    updateCampData(state, campData) {
+      state.camp = { ...campData };
     },
   },
-  mutations: {},
-  actions: {},
-  getters: {},
+  actions: {
+    updateCampData({ commit }, campData) {
+      commit("updateCampData", campData);
+    },
+  },
+  getters: {
+    getCampData(state) {
+      return state.camp;
+    },
+  },
 };
