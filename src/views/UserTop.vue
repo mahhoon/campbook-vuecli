@@ -21,7 +21,9 @@
         <span class="icon"><i class="fas fa-check-circle"></i></span
         >持ち物リストの編集
       </p>
-      <!-- <p class="non-active"><span class="icon"><i class="fas fa-camera"></i></span>写真投稿</p> -->
+      <!-- <p class="non-active">
+        <span class="icon"><i class="fas fa-camera"></i></span>写真投稿
+      </p> -->
       <p @click="logOut">
         <span class="icon"><i class="fas fa-sign-out-alt"></i></span>ログアウト
       </p>
@@ -37,43 +39,49 @@
       >
       <!-- <p class="non-active"><span class="icon"><i class="fas fa-camera"></i></span>写真投稿</p> -->
     </div>
-    <div id="addcampplan" @click="openNewcampModal">
+    <div id="addcampplan" @click="openNewCampModal">
       NEXT CAMP PLAN<br /><span><i class="fas fa-plus-circle"></i></span>
     </div>
+
     <div id="campcards">
       <ul class="campcards-wrap container">
         <li
           class="campcard"
-          v-for="(value, key) in campData"
+          v-for="(item, key) in campData"
           :key="key"
-          @click="expandPage(value, key)"
+          @click="expandPage(item, key)"
         >
           <!--:key="key"はありだっけ？-->
           <img
-            v-if="value.downloadCampImage.length === 0"
+            v-if="item.downloadCampImage.length === 0"
             src="img/campimg.png"
           />
-          <img v-else :src="value.downloadCampImage" />
+          <img v-else :src="item.downloadCampImage" />
           <div class="campcard__text">
-            <p class="campcard__place">{{ value.campsiteName }}</p>
+            <p class="campcard__place">{{ item.campsiteName }}</p>
             <p class="campcard__data">
-              {{ value.fromCampDate }}〜{{ value.toCampDate }}
+              {{ item.fromCampDate }}〜{{ item.toCampDate }}
             </p>
           </div>
         </li>
       </ul>
     </div>
+    <!-- キャンプ登録モーダル -->
+    <RegistCampModal v-show="registCampModalShow"></RegistCampModal>
+
     <Footer />
   </section>
 </template>
 
 <script>
 import { auth } from "@/main.js";
-import Footer from "@/components/Footer.vue";
 import { signOut } from "firebase/auth";
+import Footer from "@/components/Footer.vue";
+import RegistCampModal from "@/components/RegistCampModal.vue";
 
 export default {
   components: {
+    RegistCampModal,
     Footer,
   },
 
@@ -81,6 +89,8 @@ export default {
     return {
       togglemenu: "togglemenu",
       sp: "sp",
+      registCampModalShow: false,
+      campData: "",
     };
   },
 
@@ -89,13 +99,23 @@ export default {
       return this.$store.getters["auth/getUser"];
     },
   },
+
   methods: {
     logOut() {
       signOut(auth).then(() => {
         console.log("ログアウトしました");
-        this.$router.push("/");
       });
     },
+    openNewCampModal() {
+      this.registCampModalShow = true;
+      console.log("動いているよ");
+    },
+    // closeModal() {
+    //   this.registCampModalShow = false;
+    // },
+    // showUserGoodsLists() {
+    //   this.$router.push("");
+    // }
   },
 };
 </script>

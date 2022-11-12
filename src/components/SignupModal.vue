@@ -151,6 +151,8 @@ export default {
                 "auth/updateNickname",
                 result.user.displayName
               );
+              this.$store.dispatch("auth/updateUid", result.user.uid);
+              this.$store.dispatch("auth/updateEmail", result.user.email);
             }
           );
           this.$router.push("usertop");
