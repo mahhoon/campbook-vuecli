@@ -170,5 +170,5 @@ export default {
 
 <style lang="scss" scoped>
 @use "@/assets/css/global" as global;
-@use "@/assets/css/modules" as modules;
+@use "@/assets/css/base" as base;
 </style>
