@@ -5,8 +5,8 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/_base.scss";
-@import "../assets/css/_modules.scss";
+@use "@/assets/css/global" as global;
+@use "@/assets/css/base" as base;
 
 footer {
   margin-top: 10px;
@@ -14,7 +14,7 @@ footer {
   height: 80px;
   background-image: url(../assets/img/footerimg.svg);
   background-repeat: no-repeat;
-  @include sp {
+  @include global.sp {
     background-image: url(../assets/img/footerimg-sp.svg);
   }
 }

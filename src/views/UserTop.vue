@@ -52,7 +52,7 @@
           <img v-else :src="campData.downloadCampImage" />
           <div class="campcard__text">
             <p class="campcard__place">{{ campData.campsiteName }}</p>
-            <p class="campcard__data">
+            <p class="campcard__date">
               {{ campData.fromCampDate }}〜{{ campData.toCampDate }}
             </p>
           </div>
@@ -134,12 +134,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/css/_base.scss";
-@import "../assets/css/_modules.scss";
+@use "@/assets/css/global" as global;
+@use "@/assets/css/base" as base;
 
 #userindex {
   padding-top: 20px;
-  @include sp {
+  @include global.sp {
     padding-top: 10px;
   }
 }
@@ -150,7 +150,7 @@ export default {
   text-align: right;
 
   cursor: pointer;
-  @include sp {
+  @include global.sp {
     margin: 0;
     padding-right: 20px;
   }
@@ -159,18 +159,18 @@ export default {
   }
   .fa-check-circle,
   .editgoodsbtn {
-    color: $violet;
+    color: global.$violet;
   }
 }
 #addcampplan {
   clear: both;
-  @include basic-btn;
+  @include global.basic-btn;
   border-radius: 0;
   text-align: center;
   margin: 0 auto;
   width: 400px;
   cursor: pointer;
-  @include sp {
+  @include global.sp {
     width: 90%;
   }
   .fa-plus-circle {
@@ -179,11 +179,11 @@ export default {
   }
 }
 #campcards {
-  background-color: lighten($violet, 30%);
+  background-color: lighten(global.$violet, 30%);
   padding: 40px;
   margin: 50px 0;
   .campcards-wrap {
-    @include flex;
+    @include global.flex;
     padding: 0 40px;
     .campcard {
       width: 30%;
@@ -203,19 +203,20 @@ export default {
           opacity: 0.8;
         }
       }
-      .campcard__text {
+      &__text {
         text-align: center;
-        color: #fff;
         position: absolute;
         top: 60px;
         width: 100%;
         z-index: 1;
-        .campcard__place {
-          font-size: 22px;
-        }
-        .campcard__date {
-          font-size: 13px;
-        }
+      }
+      &__place {
+        color: #fff;
+        font-size: 22px;
+      }
+      &__date {
+        color: #fff;
+        font-size: 15px;
       }
     }
   }
@@ -226,7 +227,7 @@ export default {
     width: 30%;
   }
 
-  @include sp {
+  @include global.sp {
     padding: 20px;
     margin: 20px 0;
     .campcards-wrap {

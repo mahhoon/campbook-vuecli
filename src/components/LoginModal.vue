@@ -112,6 +112,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/css/_base.scss";
-@import "../assets/css/_modules.scss";
+@use "@/assets/css/global" as global;
+@use "@/assets/css/base" as base;
 </style>

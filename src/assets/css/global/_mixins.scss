@@ -1,0 +1,65 @@
+@use "variables" as variables;
+
+//mixin
+@mixin basic-btn {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: variables.$violet;
+  color: #fff;
+  width: 200px;
+  font-weight: 400;
+  font-size: 16px;
+  transition: 0.3s;
+  cursor: default;
+
+  &:hover {
+    background-color: variables.$hover-violet;
+  }
+
+  &:disabled {
+    background-color: lighten(variables.$violet, 20%);
+  }
+}
+@mixin flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@mixin sp {
+  @media (max-width: 670px) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media (min-width: 669px) {
+    @content;
+  }
+}
+
+.non-active,
+.togglemenu > .non-active {
+  color: lighten(variables.$violet, 20%);
+}
+
+.fade {
+  opacity: 0;
+  animation: fadein-anim 0.5s Linear forwards;
+
+  @keyframes fadein-anim {
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+.fade-show {
+  opacity: 1;
+}
+
+.br-sponly {
+  @include sp {
+  }
+}

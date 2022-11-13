@@ -175,8 +175,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/css/_base.scss";
-@import "../assets/css/_modules.scss";
+@use "@/assets/css/global" as global;
+@use "@/assets/css/base" as base;
 
 #headercontent {
   background-image: url(../assets/img/mainbg.jpg);
@@ -186,7 +186,7 @@ export default {
   text-align: center;
   padding: 20px 0 50px;
   height: 600px;
-  @include sp {
+  @include global.sp {
     height: auto;
     padding-bottom: 30px;
     img {
@@ -199,7 +199,7 @@ export default {
 
   p {
     padding-top: 20px;
-    @include sp {
+    @include global.sp {
       line-height: 22px;
       padding: 5px;
       font-size: 12px;
@@ -209,15 +209,15 @@ export default {
 
   .loginbuttons {
     margin-top: 20px;
-    @include sp {
+    @include global.sp {
       margin-top: 20px;
     }
     .btn-basic {
-      @include basic-btn;
+      @include global.basic-btn;
       display: inline-block;
       margin: 0 20px;
 
-      @include sp {
+      @include global.sp {
         width: 30%;
         margin: 0 10px;
         font-size: 15px;
@@ -228,7 +228,7 @@ export default {
 //機能紹介
 #introduction {
   padding: 0 40px 30px;
-  @include sp {
+  @include global.sp {
     padding: 40px 20px 20px 20px;
   }
 
@@ -254,7 +254,7 @@ export default {
       background-color: #333;
       transform: rotate(-35deg);
     }
-    @include sp {
+    @include global.sp {
       font-size: 18px;
       &::after,
       &::before {
@@ -269,9 +269,9 @@ export default {
   }
 
   .introduction_contents {
-    @include pc {
+    @include global.pc {
       margin-top: 20px;
-      @include flex;
+      @include global.flex;
     }
     .intro-img {
       width: 35%;
@@ -281,7 +281,7 @@ export default {
         box-shadow: 4px 4px 6px #ddd;
         border-radius: 6px;
       }
-      @include sp {
+      @include global.sp {
         width: 80%;
         margin: 0 auto;
       }
@@ -290,7 +290,7 @@ export default {
   .introitems-wrap {
     width: 60%;
     padding-left: 20px;
-    @include sp {
+    @include global.sp {
       margin: 20px 0;
       width: 100%;
       padding-left: 0;
@@ -299,9 +299,9 @@ export default {
     .intro-item {
       padding: 20px 20px;
       margin: 0 auto;
-      @include flex;
+      @include global.flex;
       //justify-content: flex-start;
-      @include sp {
+      @include global.sp {
         width: 100%;
         padding: 10px 0;
       }
@@ -311,11 +311,11 @@ export default {
         .fa-check-circle,
         .fa-list-alt,
         .fa-bookmark {
-          color: $violet;
+          color: global.$violet;
           font-size: 35px;
           position: relative;
           top: 4px;
-          @include sp {
+          @include global.sp {
             font-size: 25px;
           }
         }
@@ -325,18 +325,18 @@ export default {
       }
       .intro-text {
         width: 88%;
-        @include sp {
+        @include global.sp {
           width: 82%;
         }
       }
       h3 {
         font-weight: 700;
-        color: $violet;
+        color: global.$violet;
       }
       p {
         font-size: 14px;
         line-height: 1.5rem;
-        @include sp {
+        @include global.sp {
           font-size: 13px;
         }
       }
@@ -346,13 +346,13 @@ export default {
     margin-left: 40px;
     cursor: pointer;
     display: inline-block;
-    @include sp {
+    @include global.sp {
       margin: 60px 0 0 0;
     }
     img {
       width: 50px;
       vertical-align: middle;
-      @include sp {
+      @include global.sp {
         width: 40px;
       }
     }
@@ -360,7 +360,7 @@ export default {
       vertical-align: middle;
       border-bottom: 1px dotted #333;
       font-size: 13px;
-      @include sp {
+      @include global.sp {
         font-size: 13px;
       }
     }
@@ -371,14 +371,14 @@ export default {
     display: none;
     position: relative;
     width: 80%;
-    color: $violet;
+    color: global.$violet;
     padding: 10px 15px;
     font-size: 13px;
     line-height: 1.5rem;
-    border: 1px solid $violet;
+    border: 1px solid global.$violet;
     border-radius: 6px;
 
-    @include sp {
+    @include global.sp {
       width: 100%;
       margin-left: 0;
     }
@@ -393,7 +393,7 @@ export default {
       width: 0;
       height: 0;
       border-right: 8px solid transparent;
-      border-bottom: 10px solid $violet;
+      border-bottom: 10px solid global.$violet;
       border-left: 8px solid transparent;
     }
     &::after {

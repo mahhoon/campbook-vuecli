@@ -1,0 +1,39 @@
+@use "../global" as global;
+
+//basic settings
+* {
+  box-sizing: border-box;
+  font-family: "Noto Sans JP", sans-serif;
+  color: #333;
+  font-size: 15px;
+  line-height: 1.7rem;
+  @include global.sp {
+    font-size: 14px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+}
+.container {
+  max-width: 1070px;
+  min-width: 960px;
+  margin: 0 auto;
+  padding: 0 80px;
+  @include global.sp {
+    min-width: 100%;
+    padding: 0;
+  }
+}
+
+.pc {
+  display: block;
+  @include global.sp {
+    display: none;
+  }
+}
+.sp {
+  display: none;
+  @include global.sp {
+    display: block;
+  }
+}
