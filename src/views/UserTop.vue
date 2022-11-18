@@ -44,7 +44,12 @@
     </div>
     <div id="campcards">
       <ul class="campcards-wrap container">
-        <li class="campcard" v-for="(campData, key) in campDatas" :key="key">
+        <li
+          class="campcard"
+          v-for="(campData, key) in campDatas"
+          :key="key"
+          @click="expandPage(campData)"
+        >
           <img
             v-if="campData.downloadCampImage.length === 0"
             src="@/assets/img/campimg.png"
@@ -122,6 +127,11 @@ export default {
     openNewCampModal() {
       this.registCampModalShow = true;
       console.log("動いているよ");
+    },
+    expandPage(campData) {
+      this.$store.dispatch("camp/updateCurrentCamp", campData);
+      // this.$store.dispatch("camp/updateCurrentCampData", campData);
+      this.$router.push("camppage");
     },
     // closeModal() {
     //   this.registCampModalShow = false;

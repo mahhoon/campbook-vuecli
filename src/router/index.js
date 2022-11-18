@@ -22,6 +22,11 @@ const routes = [
     // @ is an alias to /src
     component: () => import("@/views/UserTop.vue"),
   },
+  {
+    path: "/camppage",
+    mname: "CampPage",
+    component: () => import("@/views/CampPage.vue"),
+  },
 ];
 
 const router = new VueRouter({
