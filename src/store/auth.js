@@ -18,6 +18,9 @@ export const auth = {
     updateEmail(state, email) {
       state.user.email = email;
     },
+    updateUser(state, updateData) {
+      state.user[updateData.propertyName] = updateData.updateValue;
+    },
   },
   actions: {
     //mutationを実行させる人（コンポーネントからdispatchで呼ばれる）
@@ -29,6 +32,9 @@ export const auth = {
     },
     updateEmail({ commit }, email) {
       commit("updateEmail", email);
+    },
+    updateUser({ commit }, updateData) {
+      commit("updateUser", updateData);
     },
   },
   getters: {

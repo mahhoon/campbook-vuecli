@@ -1,5 +1,5 @@
 <template>
-  <section id="camppage" v-show="camppage">
+  <section id="camppage">
     <div class="user-heading container">
       <!--pc-->
       <h1 class="pc" v-on:click="goUserIndex">
