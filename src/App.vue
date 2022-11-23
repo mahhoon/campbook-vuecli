@@ -21,12 +21,21 @@ export default {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user.displayName);
-        this.$store.dispatch("auth/updateNickname", user.displayName);
-        this.$store.dispatch("auth/updateUid", user.uid);
-        this.$store.dispatch("auth/updateEmail", user.email);
+
+        this.$store.dispatch("auth/updateUser", {
+          propertyName: "nickname", //プロパティ名も文字列で渡す
+          updateValue: user.displayName,
+        });
+        this.$store.dispatch("auth/updateUser", {
+          propertyName: "uid",
+          updateValue: user.uid,
+        });
+        this.$store.dispatch("auth/updateUser", {
+          propertyName: "email",
+          updateValue: user.email,
+        });
 
         onValue(ref(database, `campbooks/${user.uid}`), (snapshot) => {
-          // this.campData = snapshot.val();
           console.log(snapshot.val());
           this.$store.dispatch("camp/updateCampData", snapshot.val());
         });

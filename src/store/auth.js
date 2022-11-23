@@ -9,26 +9,15 @@ export const auth = {
   },
   mutations: {
     //データの書き換えを実行する人
-    updateNickname(state, nickname) {
-      state.user.nickname = nickname;
-    },
-    updateUid(state, uid) {
-      state.user.uid = uid;
-    },
-    updateEmail(state, email) {
-      state.user.email = email;
+    updateUser(state, updateData) {
+      state.user[updateData.propertyName] = updateData.updateValue; //userオブジェクトのkeyを文字列で指定する場合は[]
     },
   },
   actions: {
     //mutationを実行させる人（コンポーネントからdispatchで呼ばれる）
-    updateNickname({ commit }, nickname) {
-      commit("updateNickname", nickname); //commitはmutationを実行する関数（実行するmutation名, 渡す値）
-    },
-    updateUid({ commit }, uid) {
-      commit("updateUid", uid);
-    },
-    updateEmail({ commit }, email) {
-      commit("updateEmail", email);
+    updateUser({ commit }, updateData) {
+      //コンポーネントから渡ってきてるのはオブジェクト
+      commit("updateUser", updateData); //commitはmutationを実行する関数（実行するmutation名, 渡す値）
     },
   },
   getters: {
