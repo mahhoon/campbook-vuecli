@@ -1,9 +1,9 @@
 <template>
-  <section id="camppage" v-show="camppage">
+  <section id="camppage">
     <div class="user-heading container">
       <!--pc-->
       <h1 class="pc" v-on:click="goUserIndex">
-        <img src="img/logo-small.svg" />
+        <img src="@/assets/img/logo-small.svg" />
       </h1>
       <div class="user pc">
         <p class="username">{{ currentUser.nickname }}さん、こんにちは</p>
